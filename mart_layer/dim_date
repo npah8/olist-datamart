@@ -1,0 +1,16 @@
+config {
+    type: "table",
+    schema: "mart_olist_commerce",
+    description: "Trục thời gian phân tích"
+}
+
+SELECT
+    d AS date,
+    EXTRACT(YEAR FROM d) AS year,
+    EXTRACT(QUARTER FROM d) AS quarter,
+    EXTRACT(MONTH FROM d) AS month,
+    FORMAT_DATE('%B', d) AS month_name,
+    EXTRACT(WEEK FROM d) AS week,
+    FORMAT_DATE('%A', d) AS day_of_week
+FROM
+    UNNEST(GENERATE_DATE_ARRAY('2016-01-01', '2018-12-31', INTERVAL 1 DAY)) AS d

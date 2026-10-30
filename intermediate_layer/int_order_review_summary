@@ -1,0 +1,12 @@
+config {
+    type: "view",
+    schema: "intermediate"
+}
+
+SELECT
+    order_id,
+    ROUND(AVG(review_score), 1) AS review_score
+FROM
+    ${ref("stg_reviews")}
+GROUP BY
+    order_id
