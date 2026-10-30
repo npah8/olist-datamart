@@ -1,0 +1,29 @@
+config {
+    type: "table",
+    schema: "mart_olist_commerce",
+    description: "Bảng Fact chính chứa thông tin chi tiết từng sản phẩm trong đơn hàng"
+}
+
+SELECT
+    oi.order_id,
+    oi.order_item_id,
+    o.customer_id,
+    oi.product_id,
+    oi.seller_id,
+    o.order_status,
+    DATE(o.order_purchase_date) AS order_purchase_date,
+    DATE(o.order_delivered_customer_date) AS order_delivered_customer_date,
+    DATE(o.order_estimated_delivery_date) AS order_estimated_delivery_date,
+    oi.price,
+    oi.freight_value,
+    p.payment_value,
+    p.payment_type,
+    r.review_score,
+    d.delivery_days,
+    IFNULL(d.is_late_delivery, FALSE) AS is_late_delivery
+FROM
+    ${ref("stg_oder_items")} oi  -- Chú ý điền đúng tên file stg_oder_items bị viết thiếu chữ 'r' của bạn
+LEFT JOIN ${ref("stg_oders")} o ON oi.order_id = o.order_id
+LEFT JOIN ${ref("int_order_payment_summary")} p ON oi.order_id = p.order_id
+LEFT JOIN ${ref("int_order_review_summary")} r ON oi.order_id = r.order_id
+LEFT JOIN ${ref("int_order_delivery_metrics")} d ON oi.order_id = d.order_id
