@@ -22,8 +22,8 @@ SELECT
     d.delivery_days,
     IFNULL(d.is_late_delivery, FALSE) AS is_late_delivery
 FROM
-    ${ref("stg_oder_items")} oi  -- Chú ý điền đúng tên file stg_oder_items bị viết thiếu chữ 'r' của bạn
-LEFT JOIN ${ref("stg_oders")} o ON oi.order_id = o.order_id
+    ${ref("stg_order_items")} oi  -- Chú ý điền đúng tên file stg_oder_items bị viết thiếu chữ 'r' của bạn
+LEFT JOIN ${ref("stg_orders")} o ON oi.order_id = o.order_id
 LEFT JOIN ${ref("int_order_payment_summary")} p ON oi.order_id = p.order_id
 LEFT JOIN ${ref("int_order_review_summary")} r ON oi.order_id = r.order_id
 LEFT JOIN ${ref("int_order_delivery_metrics")} d ON oi.order_id = d.order_id
