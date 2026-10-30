@@ -14,5 +14,5 @@ SELECT
 FROM
     `inspiring-keel-513202-g8.olist.olist_products_dataset` p
 LEFT JOIN
-    `inspiring-keel-513202-g8.olist.product_category_name_translati` t
+    `inspiring-keel-513202-g8.olist.product_category_name_translation` t
 ON p.product_category_name = t.product_category_name
