@@ -1,0 +1,12 @@
+config {
+    type: "view",
+    schema: "staging"
+}
+
+SELECT
+    seller_id,
+    CAST(seller_zip_code_prefix AS INT64) AS seller_zip_code_prefix,
+    seller_city,
+    seller_state
+FROM
+    `inspiring-keel-513202-g8.olist.olist_sellers_dataset`

@@ -1,0 +1,10 @@
+config {
+    type: "view",
+    schema: "staging"
+}
+
+SELECT
+    order_id,
+    CAST(review_score AS INT64) AS review_score
+FROM
+    `inspiring-keel-513202-g8.olist.olist_order_reviews_dataset`

@@ -1,0 +1,16 @@
+config {
+    type: "view",
+    schema: "staging",
+    description: "Chuẩn hóa dữ liệu đơn hàng gốc"
+}
+
+SELECT
+    order_id,
+    customer_id,
+    order_status,
+    TIMESTAMP(order_purchase_timestamp) AS order_purchase_date,
+    TIMESTAMP(order_delivered_customer_date) AS order_delivered_customer_date,
+    TIMESTAMP(order_estimated_delivery_date) AS order_estimated_delivery_date
+FROM
+    `inspiring-keel-513202-g8.olist.olist_orders_dataset`
+
